@@ -33,7 +33,7 @@ export default function NewsCard(props) {
         root: {
             transition:"all 3s ease-in-out",
             opacity: visible ? 1 : 0,
-            width: "20%",
+            width: "30%",
             padding: "10px"
         },
         card: {
