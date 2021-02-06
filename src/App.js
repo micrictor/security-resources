@@ -1,16 +1,17 @@
-import logo from './logo.svg';
+import { Container, Typography } from '@material-ui/core';
+import NewsCard from './components/NewsCard'
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <Container maxWidth="lg" class="App-header">
+      <Typography variant="h1">Hello!</Typography>
+      <NewsCard
+        title="News!"
+        label="Things happened"
+        description="Look at all the stuff that happened!"
+      />
+    </Container>
   );
 }
 
