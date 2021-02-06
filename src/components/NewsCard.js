@@ -34,6 +34,7 @@ export default function NewsCard(props) {
         root: {
             transition:"all 3s ease-in-out",
             opacity: visible ? 1 : 0,
+            maxWidth: "25%", 
         },
         undoButton: {
             justifyContext: "center",
