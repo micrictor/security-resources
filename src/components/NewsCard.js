@@ -8,6 +8,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteSweepSharpIcon from '@material-ui/icons/DeleteSweepSharp';
+import { UndoOutlined } from '@material-ui/icons';
 
 
 
@@ -24,27 +25,49 @@ export default function NewsCard(props) {
         }
     }
 
-    const handeUndoHide = () => {
+    const handleUndoHide = () => {
         clearTimeout(deleteTimer);
         setVisible(true);
     }
 
+    const styles = {
+        root: {
+            transition:"all 3s ease-in-out",
+            opacity: visible ? 1 : 0,
+        },
+        undoButton: {
+            justifyContext: "center",
+            fontSize: "50px"
+        },
+    }
+
     return (
-        <Box visibility={visible ? "visible" : "hidden"}>
-            <Card raised={true} >
-                <CardHeader
-                    title={title}
-                    subheader={label}
-                    action={
-                        <IconButton aria-label="hide" onClick={handleHideClick}>
-                            <DeleteSweepSharpIcon />
-                        </IconButton>
-                    }
-                />
-                <CardContent>
-                    {description}
-                </CardContent>
-            </Card>
+        <Box style={styles.root} alignContent="center" alignItems="center">
+            { !visible &&
+                <IconButton
+                    color="inherit"
+                    aria-label="undo-hide"
+                    onClick={handleUndoHide}
+                >
+                    <UndoOutlined style={styles.undoButton} />
+                </IconButton>
+            }
+            { visible &&
+                <Card raised={true} >
+                    <CardHeader
+                        title={title}
+                        subheader={label}
+                        action={
+                            <IconButton aria-label="hide" onClick={handleHideClick}>
+                                <DeleteSweepSharpIcon />
+                            </IconButton>
+                        }
+                    />
+                    <CardContent>
+                        {description}
+                    </CardContent>
+                </Card>
+            }
         </Box>
     )
 }
