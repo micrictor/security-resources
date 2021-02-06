@@ -21,7 +21,7 @@ export default function NewsCard(props) {
     const handleHideClick = () => {
         setVisible(false);
         if (onDelete) {
-            deleteTimer = setTimeout(() => onDelete(), 1500);
+            deleteTimer = setTimeout(() => onDelete(), 3100);
         }
     }
 
