@@ -12,20 +12,23 @@ import { UndoOutlined } from '@material-ui/icons';
 
 
 export default function NewsCard(props) {
-    const { fullDocUrl, title, label, description, onDelete, pressReleaseUrl } = props;
+    const { fullDocUrl, title, label, description, onDelete, undoDelete, pressReleaseUrl } = props;
 
     const [visible, setVisible] = React.useState(true);
-    let deleteTimer;
+    const [deleteTimer, setDeleteTimer] = React.useState(0);
 
     const handleHideClick = () => {
         setVisible(false);
         if (onDelete) {
-            deleteTimer = setTimeout(() => onDelete(), 3100);
+            setDeleteTimer(setTimeout(onDelete, 3100));
         }
     }
 
     const handleUndoHide = () => {
         clearTimeout(deleteTimer);
+        if (undoDelete) {
+            undoDelete();
+        }
         setVisible(true);
     }
 
@@ -37,7 +40,9 @@ export default function NewsCard(props) {
             padding: "10px"
         },
         card: {
+            flex: 1,
             height: "100%",
+            innerHeight: "100%",
             justify: "space-between",
             display: "flex",
             flexDirection: "column",
@@ -46,6 +51,9 @@ export default function NewsCard(props) {
             justifyContext: "center",
             fontSize: "50px",
         },
+        actionsContainer: {
+            marginBottom: 'auto',
+        }
     }
 
     return (
@@ -70,10 +78,10 @@ export default function NewsCard(props) {
                             </IconButton>
                         }
                     />
-                    <CardContent>
+                    <CardContent style={{flexGrow: 1}}>
                         {description}
                     </CardContent>
-                    <CardActions alignItems="bottom">
+                    <CardActions style={styles.actionsContainer}>
                         <Button size="small" color="primary" href={pressReleaseUrl} target="_blank" >
                             Press Release
                         </Button>
